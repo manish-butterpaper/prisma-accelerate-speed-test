@@ -1,4 +1,4 @@
-# Accelerate Speed Test
+# Prisma Accelerate Speed Test
 
 This app demonstrates the performance benefits of [Accelerate](https://www.prisma.io/data-platform/accelerate), a new Early Access product by Prisma. Accelerate provides a global cache with built-in connection pooling.
 

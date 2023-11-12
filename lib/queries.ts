@@ -1,16 +1,14 @@
 import { prisma } from "./prisma";
 
 export async function fetchSomeData(cache: boolean): Promise<void> {
-  await prisma.linkOpen.count({
+  await prisma.userProject.count({
     cacheStrategy: cache ? { ttl: 60 * 60 * 24 } : undefined,
     where: {
-      link: {
-        User: {
-          email: {
-            contains: ".com",
-          },
-        },
-      },
+      User: {
+        email: {
+          contains: ".com"
+        }
+      }
     },
   });
 }
@@ -21,18 +19,16 @@ interface FetchOptions {
 }
 
 export async function fecthData({ runHeavyQuery, cacheQuery }: FetchOptions) {
-  const res = await prisma.linkOpen
+  const res = await prisma.userProject
     .count({
       cacheStrategy: cacheQuery ? { ttl: 60 * 60 * 24 } : undefined,
       take: runHeavyQuery ? undefined : 1,
       where: {
-        link: {
-          User: {
-            email: {
-              contains: ".net",
-            },
-          },
-        },
+        User: {
+          email: {
+            contains: ".com"
+          }
+        }
       },
     })
     .withAccelerateInfo();
